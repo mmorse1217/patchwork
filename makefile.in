@@ -1,0 +1,119 @@
+#------------------------------------------------------
+# machine dependent parameters
+
+#------------------------------------------------------
+# default compilation mode
+#------------------------------------------------------
+MODE = release
+
+#------------------------------------------------------
+# shell specification
+#------------------------------------------------------
+SHELL = /bin/bash
+
+#------------------------------------------------------
+# included directories
+#------------------------------------------------------
+
+ #INCLUDES = -I"/System/Library/Frameworks/GLUT.framework"
+ #INCLUDES = -I/usr/X11R6/include
+
+
+#------------------------------------------------------
+# necessary libraries for link
+#------------------------------------------------------
+#LIBS = 	-lstdc++ -L"/System/Library/Frameworks/GLUT.framework" -framework GLUT -framework Cocoa\
+	#-L"/System/Library/Frameworks/OpenGL.framework/Libraries" -framework OpenGL\
+	#-L"/System/Library/Frameworks/vecLib.framework/vecLib" -framework vecLib\
+	#-L/usr/X11R6/lib -L/sw/lib/ -lpng -lX11 -lXi -lXt -lXmu 
+
+OS := $(shell uname)
+ifeq ($(OS), Darwin)
+ INCLUDES = -I"/System/Library/Frameworks/GLUT.framework"
+ INCLUDES = -I/usr/X11R6/include  \
+			-I"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/Accelerate.framework/Versions/Current/Headers"
+ endif
+
+#------------------------------------------------------
+# necessary libraries for link
+#------------------------------------------------------
+ifeq ($(OS), Darwin)
+LIBS = 	-lstdc++ -L"/System/Library/Frameworks/GLUT.framework" -framework GLUT -framework Cocoa\
+	-L"/System/Library/Frameworks/OpenGL.framework/Libraries" -framework OpenGL\
+	-L"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/Accelerate.framework/Versions/Current/"\
+ 	-framework Accelerate\
+	-L/usr/X11R6/lib -lpng -lX11 -lXi -lXt -lXmu -L${BLENDSURF_DIR} -lblend -lgomp
+LIBS += -L${BLENDSURF_DIR} -lblend -L${FACEMAP_DIR} -lpatchwork 
+ endif
+
+ifeq ($(OS), Linux)
+# needed for mercer
+LIBS = -L${FACEMAP_DIR}/lib -lpatchwork -L${BLENDSURF_DIR} -lblend
+LIBS +=  -L/usr/lib -lstdc++  -lglut -lGLU -lGL -L/usr/lib -lblas -L/usr/lib -llapack -lpng -lgomp -lm
+
+# needed for prince
+INCLUDES = -I/usr/include 
+#LIBS =  -L${LAPACK_LIB} -L/usr/lib64 -L/home/mjm1030/external_downloads/x86_solaris_64bit/glut-3.7/lib/glut -lglut -lGLU -lGL -lblas -llapack -lpng  -L${BLENDSURF_DIR} -lblend
+endif
+ifeq ($(OS), Linux)
+# needed for mercer
+LIBS =  -L${LAPACK_LIB} -L/lib64 -lstdc++ -L/usr/bin -L/home/mjm1030/external_downloads/x86_solaris_64bit/glut-3.7/lib/glut -lglut -lGLU -lGL -lblas -llapack -lpng  -L${BLENDSURF_DIR} -lblend -L${FACEMAP_DIR}/lib -lpatchwork -L${BLENDSURF_DIR} -lblend -lm -lgomp
+
+# needed for prince
+INCLUDES = -I/home/mjm1030/external_downloads/x86_solaris_64bit/glut-3.7/include -I/usr/include 
+#LIBS =  -L${LAPACK_LIB} -L/usr/lib64 -L/usr/bin -L/home/mjm1030/external_downloads/x86_solaris_64bit/glut-3.7/lib/glut -lglut -lGLU -lGL -lblas -llapack -lpng  -L${BLENDSURF_DIR} -lblend
+endif
+
+PETSC_INC = ${PETSC_DIR}/${PETSC_ARCH}/include
+PETSC_LIB = ${PETSC_DIR}/${PETSC_ARCH}/lib
+
+#LIBS = -lglut32 -lglu32 -lopengl32  -lblas -llapack -lpng -libebi 
+ifeq ($(OS), Darwin)
+INCLUDES += -I${BLENDSURF_DIR} -I${P4EST_DIR}/include   -I${FACEMAP_DIR}/src -I${FACEMAP_DIR}/tests/  -I${PETSC_INC}
+LIBS += -L${P4EST_DIR}/lib -lp4est -L${P4EST_DIR}/lib -lsc -L${PETSC_LIB} -lmpi
+endif
+ifeq ($(OS), Linux)
+INCLUDES += -I${BLENDSURF_DIR} -I${P4EST_DIR}/include   -I${FACEMAP_DIR}/src -I${FACEMAP_DIR}/tests/  -I${MPI_HOME}/include
+LIBS += -L${P4EST_DIR}/lib -lp4est -L${P4EST_DIR}/lib -lsc -L${PETSC_LIB} -L${MPI_HOME}/lib -lpetsc -L${PETSC_LIB} 
+endif
+ifeq ($(MACHINE_NAME), docker)
+LIBS += -lmpich -lmpichcxx
+endif
+ifeq ($(MACHINE_NAME), prince)
+LIBS += -lmpi -lmpi_cxx
+LIBS += -fopenmp
+endif
+#-L/usr/bin -L/usr/lib64 -L/usr/lib/gcc/x86_64-linux-gnu/4.8 -lstdc++
+#------------------------------------------------------
+# archive program executable
+#------------------------------------------------------
+AR = ar
+ARFLAGS = -r
+RANLIB = ranlib
+
+#------------------------------------------------------
+# comnpiler executables
+#------------------------------------------------------
+#CC  = gcc
+#CXX = g++
+CC  = ${HEDGEHOG_CC}
+CXX  = ${HEDGEHOG_CXX}
+
+#------------------------------------------------------
+# compiler flags for debug and release modes
+#------------------------------------------------------
+ifeq ($(MODE),debug)
+	CFLAGS 	 =   -Wall -W -Wno-sign-compare -Wno-unused-label -fopenmp -MMD ${INCLUDES}
+	CXXFLAGS =   -Wall -W -Wno-sign-compare  -Wno-unused-label -fopenmp -MMD ${INCLUDES}
+	LDLIBS = ${LIBS} -pg -Og -fopenmp
+else
+	CFLAGS 	 = -O3 -Wall -W -Wno-sign-compare  -Wno-unused-label  -fopenmp -MMD ${INCLUDES}
+	CXXFLAGS =  -std=c++11 -O3 -Wall -W -Wno-sign-compare -Wno-unused-label  -fopenmp -MMD ${INCLUDES}
+	LDLIBS = ${LIBS} -g -fopenmp
+endif
+
+#------------------------------------------------------
+# rules to build object files
+#------------------------------------------------------
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -g -c -fmessage-length=0 $*.cpp

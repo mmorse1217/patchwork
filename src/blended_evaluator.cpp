@@ -1,5 +1,4 @@
 #include "blended_evaluator.hpp"
-#include "face_map_obj.hpp"
 #include <iomanip>
 
 BlendedEvaluator::BlendedEvaluator(string wrl_filename){

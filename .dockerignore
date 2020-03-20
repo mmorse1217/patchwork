@@ -1,0 +1,6 @@
+.git/
+makefile
+makefile.in
+build/
+lib/
+bin/

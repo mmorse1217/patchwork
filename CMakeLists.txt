@@ -21,7 +21,7 @@ find_package(LAPACK REQUIRED)
 find_package(Blendsurf REQUIRED)
 find_package(MPI REQUIRED)
 find_package(p4est REQUIRED)
-find_package(zlib REQUIRED)
+find_package(ZLIB REQUIRED)
 
 set(CMAKE_MODULE_PATH "/usr/X11R6/;${CMAKE_MODULE_PATH}")
 

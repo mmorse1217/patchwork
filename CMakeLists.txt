@@ -23,8 +23,8 @@ find_package(MPI REQUIRED)
 find_package(p4est REQUIRED)
 find_package(ZLIB REQUIRED)
 
-set(CMAKE_MODULE_PATH "/usr/X11R6/;${CMAKE_MODULE_PATH}")
-
+message(STATUS "env var " ${P4EST_DIR})
+message(STATUS "p4est include dir ${p4est_INCLUDE_DIR})
 add_subdirectory(src)
 add_subdirectory(tests)
 

@@ -61,6 +61,6 @@ ENTRYPOINT ["/entrypoint.sh"]
 #        -DCOMPILE_RENDERER=True ..  && make 
 #
 ## to use the container
-#FROM patchwork-deps as patchwork-dev
+FROM patchwork-deps as patchwork-dev
 
 CMD ["/bin/bash"]

@@ -24,7 +24,7 @@ find_package(p4est REQUIRED)
 find_package(ZLIB REQUIRED)
 
 message(STATUS "env var " ${P4EST_DIR})
-message(STATUS "p4est include dir ${p4est_INCLUDE_DIR})
+message(STATUS "p4est include dir" ${p4est_INCLUDE_DIR})
 add_subdirectory(src)
 add_subdirectory(tests)
 

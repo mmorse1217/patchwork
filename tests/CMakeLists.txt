@@ -21,7 +21,6 @@ set(PATCHWORK_TEST_HEADER
 )
 
 #move executable to build/bin
-set( CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin )
 add_executable(test_patchwork test_patchwork.cpp ${PATCHWORK_TEST_SRC})
 
 target_link_libraries(test_patchwork patchwork

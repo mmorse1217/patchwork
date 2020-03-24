@@ -10,7 +10,6 @@ RUN apt-get update && apt-get install -y \
     liblapack-dev \
     mpich \
     zlib1g-dev &&\
-
     apt-get purge -y curl && \
     apt-get autoremove -y && \
     #apt-get purge -y ca-certificates &&\
@@ -38,15 +37,25 @@ RUN cd libs && \
     make && \
     make install 
 
+RUN mkdir /patchwork
+RUN cp /libs/blendsurf/ccsubmatall.dat /patchwork
+RUN cp /libs/blendsurf/bdsurf_U_ONE.dat /patchwork
+
 # defines CI build: checks that patchwork core and renderer still compile
 FROM patchwork-deps as patchwork-build
-COPY . patchwork/
-RUN mkdir -p patchwork/build/ 
-WORKDIR patchwork/build/
-ENV BLENDSURF_DIR=/libs/blendsurf P4EST_DIR=/libs/p4est-1.1
-RUN apt-get install -y --no-install-recommends 
-RUN cmake -DCMAKE_MODULE_PATH=/usr/share/cmake-3.10/Modules/ ..  && \
-    make
+#COPY . /patchwork/
+#RUN mkdir -p /patchwork/build/ 
+#WORKDIR /patchwork/build/
+#ENV BLENDSURF_DIR=/libs/blendsurf P4EST_DIR=/libs/p4est-1.1
+#RUN cmake -DCMAKE_MODULE_PATH=/usr/share/cmake-3.10/Modules/ ..  && \
+#    make
+#WORKDIR /patchwork/
+COPY . /patchwork/
+COPY entrypoint.sh /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
+
+
 #RUN CMAKE_PREFIX_PATH=/libs/blendsurf:/libs/p4est cmake -DCMAKE_MODULE_PATH=/usr/share/cmake-3.10/Modules/ .. && \
 #    make
 #        -DCOMPILE_RENDERER=True ..  && make 

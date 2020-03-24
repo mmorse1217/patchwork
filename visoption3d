@@ -3,23 +3,23 @@
 %------------------------------------------------------------------------------------
 %BASIC CONTROLS(CATMULL-CLARK)
 
--ccsurf_submatlibfile		../blendsurf3/ccsubmatall.dat %ccsubmat_int_boun_v8.dat
+-ccsurf_submatlibfile		ccsubmatall.dat %ccsubmat_int_boun_v8.dat
 -ccsurf_renderlvl		5
 -ccsurf_flats			-1		%flatness parameter, -1 is the default val
 						%given in paper (Biermann, Zorin)
 %------------------------------------------------------------------------------------
 %BASIC CONTROLS(BLEND SURFACE)
 
--bdsurf_submatlibfile	../blendsurf3/ccsubmatall.dat % ccsubmat_intboun13_corner8.dat % ccsubmat_int_v13.dat %	
--bdsurf_bdulibfile		../blendsurf3/bdsurf_U_ONE.dat
--bdsurf_meshfile ../wrl_files/flat_patch.wrl	
-#-bdsurf_meshfile ../wrl_files/half_donut.wrl	
-#-poly_coeffs_file ../wrl_files/poly/flat_patch.poly
--poly_coeffs_file ../wrl_files/poly/flat_patch.poly
-#-bdsurf_meshfile ../wrl_files/two_patches_shared_edge.wrl	
-#-poly_coeffs_file ../wrl_files/poly/two_patches_shared_edge.poly
-#-bdsurf_meshfile ../wrl_files/new_ppp.wrl	
-#-poly_coeffs_file ../wrl_files/poly/explicit_torus_patches.poly
+-bdsurf_submatlibfile	ccsubmatall.dat % ccsubmat_intboun13_corner8.dat % ccsubmat_int_v13.dat %	
+-bdsurf_bdulibfile		bdsurf_U_ONE.dat
+-bdsurf_meshfile        wrl_meshes/wrl/flat_patch.wrl	
+#-bdsurf_meshfile       wrl_meshes/wrl/half_donut.wrl	
+#-poly_coeffs_file      wrl_meshes/poly/flat_patch.poly
+-poly_coeffs_file       wrl_meshes/poly/flat_patch.poly
+#-bdsurf_meshfile       wrl_meshes/wrl/two_patches_shared_edge.wrl	
+#-poly_coeffs_file      wrl_meshes/poly/two_patches_shared_edge.poly
+#-bdsurf_meshfile       wrl_meshes/wrl/new_ppp.wrl	
+#-poly_coeffs_file      wrl_meshes/poly/explicit_torus_patches.poly
 -evaluator_type polynomial 
 -bdsurf_renderlvl	    4
 -bdsurf_rendergen		0		% 0 = render full mesh, 

@@ -16,12 +16,12 @@ TEST_CASE("Test face-map approximation of geometric quantities", "[diff-geom]"){
     char filepoly[300];
 
     load_options(filec, refinement_factor, patch_order, adaptive, filepoly);
-    patch_order = 15;
+    patch_order = 3;
     refinement_factor = 0;
     //AnalyticEvaluator* polynomial_evaluator = 
-        //new AnalyticEvaluator( string("../wrl_files/flat_patch.wrl"), &gaussian);
+        //new AnalyticEvaluator( string("wrl_meshes/wrl/flat_patch.wrl"), &gaussian);
     PolynomialEvaluator* polynomial_evaluator = 
-       new PolynomialEvaluator( string("../wrl_files/poly/parabaloid.poly"), string("../wrl_files/parabaloid.wrl") );
+       new PolynomialEvaluator( string("wrl_meshes/poly/parabaloid.poly"), string("wrl_meshes/wrl/parabaloid.wrl") );
 
     //FaceMapSurf* face_map = new FaceMapSurf(polynomial_evaluator);
     //face_map->set_params(refinement_factor, patch_order, 1); // adaptive
@@ -51,7 +51,7 @@ TEST_CASE("Test face-map approximation of geometric quantities", "[diff-geom]"){
             double normal_magnitude = normal.length();
             normal /= normal_magnitude;
             vector<double> coefs = Differential::first_fundamental_form(P_u, P_v);
-            CHECK(fabs(normal_magnitude - Differential::determinant_of_first_fundamental_form(coefs)) <= 1e-14);
+            CHECK(fabs(normal_magnitude - Differential::determinant_of_first_fundamental_form(coefs)) <= 1e-13);
             vector<double> second_form = Differential::second_fundamental_form(P_u,P_v,P_uu, P_uv, P_vv);
             vector<double> first_form = Differential::first_fundamental_form(P_u,P_v);
             double E = first_form[0];

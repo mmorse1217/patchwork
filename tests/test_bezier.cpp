@@ -12,7 +12,7 @@ TEST_CASE("Test bezier related functions", "[bezier]"){
 
     load_options(filec, refinement_factor, patch_order, adaptive, filepoly);
     PolynomialEvaluator* polynomial_evaluator = 
-        new PolynomialEvaluator(string("../wrl_files/poly/flat_patch.poly"), string("../wrl_files/flat_patch.wrl"));
+        new PolynomialEvaluator(string("wrl_meshes/poly/flat_patch.poly"), string("wrl_meshes/wrl/flat_patch.wrl"));
 
     FaceMapSurf* face_map = new FaceMapSurf(polynomial_evaluator);
     face_map->set_params(refinement_factor, patch_order, adaptive, 1e-4);
@@ -545,7 +545,7 @@ TEST_CASE("Test face-map basis funcs.", "[basis]"){
 
     load_options(filec, refinement_factor, patch_order, adaptive, filepoly);
     BlendedEvaluator* blended_evaluator = 
-        new BlendedEvaluator("../wrl_files/cube.wrl");
+        new BlendedEvaluator("wrl_meshes/wrl/cube.wrl");
 
     FaceMapSurf* face_map = new FaceMapSurf(blended_evaluator);
     adaptive = 1;

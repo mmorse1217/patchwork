@@ -3,10 +3,10 @@
 #include "analytic_evaluator.hpp"
 #include "face_map.hpp"
 TEST_CASE("Test spline face-map patch convergence under uniform refinement", "[converge][refine]"){
-    string filename = "../wrl_files/flat_patch.wrl";
+    string filename = "wrl_meshes/wrl/flat_patch.wrl";
     AnalyticEvaluator* evaluator = new AnalyticEvaluator(filename, &exp_sin_cos);
 
-    int upper = 34;
+    int upper = 24;
     //int upper = 22;
     //int upper = 10;
     int lower = 6;
@@ -63,12 +63,12 @@ TEST_CASE("Test spline face-map patch convergence under uniform refinement", "[c
 
         delete face_map;
     }
-    ofstream f;
-    f.open("tests/bspline_relative_error_exp_sin_cos.csv");
-        cout << relative_error << endl;
-        f << relative_error;
-
-        f.close();
+//    ofstream f;
+//    f.open("tests/bspline_relative_error_exp_sin_cos.csv");
+//        cout << relative_error << endl;
+//        f << relative_error;
+//
+//        f.close();
 
 
 }

@@ -74,8 +74,8 @@ void check_face_map_fit_accuracy(const unique_ptr<SurfaceEvaluator>& evaluator,
 TEST_CASE("", "[explicit][face-map][integration]"){
     SECTION("exact flat patch"){
 
-        string poly_file = "../wrl_files/poly/flat_patch.poly";
-        string patch_file = "../wrl_files/flat_patch.wrl";
+        string poly_file = "wrl_meshes/poly/flat_patch.poly";
+        string patch_file = "wrl_meshes/wrl/flat_patch.wrl";
         unique_ptr<SurfaceEvaluator> polynomial_evaluator = 
             unique_ptr<PolynomialEvaluator>(new PolynomialEvaluator(poly_file, patch_file));
 
@@ -89,8 +89,8 @@ TEST_CASE("", "[explicit][face-map][integration]"){
     }
     SECTION("exact torus"){
 
-        string poly_file = "../wrl_files/poly/explicit_torus_patches.poly";
-        string patch_file = "../wrl_files/newtorus.wrl";
+        string poly_file = "wrl_meshes/poly/explicit_torus_patches.poly";
+        string patch_file = "wrl_meshes/wrl/newtorus.wrl";
         unique_ptr<SurfaceEvaluator> polynomial_evaluator = 
             unique_ptr<PolynomialEvaluator>(new PolynomialEvaluator(poly_file, patch_file));
 
@@ -105,7 +105,7 @@ TEST_CASE("", "[explicit][face-map][integration]"){
 }
 TEST_CASE("", "[analytic][face-map][integration]"){
     SECTION("single gaussian patch"){
-        string patch_file = "../wrl_files/flat_patch.wrl";
+        string patch_file = "wrl_meshes/wrl/flat_patch.wrl";
         unique_ptr<SurfaceEvaluator> polynomial_evaluator = 
             unique_ptr<AnalyticEvaluator>(new AnalyticEvaluator(patch_file, &gaussian));
 
@@ -119,7 +119,7 @@ TEST_CASE("", "[analytic][face-map][integration]"){
     }
 }
 TEST_CASE("", "[blended][face-map][integration][cube]"){
-    string patch_file = "../wrl_files/cube.wrl";
+    string patch_file = "wrl_meshes/wrl/cube.wrl";
 
     unique_ptr<SurfaceEvaluator> polynomial_evaluator = 
         unique_ptr<BlendedEvaluator>(new BlendedEvaluator(patch_file));
@@ -142,7 +142,7 @@ TEST_CASE("", "[blended][face-map][integration][cube]"){
     }
 }
 TEST_CASE("", "[blended][face-map][integration][prop]"){
-    string patch_file = "../wrl_files/ppp.wrl";
+    string patch_file = "wrl_meshes/wrl/ppp.wrl";
 
     unique_ptr<SurfaceEvaluator> polynomial_evaluator = 
         unique_ptr<BlendedEvaluator>(new BlendedEvaluator(patch_file));

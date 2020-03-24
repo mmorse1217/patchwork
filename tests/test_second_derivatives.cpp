@@ -46,14 +46,14 @@ TEST_CASE("Test second derivative patch evaluation known solution", "[derivative
                 Point3 Xuu = results[3];
                 Point3 Xuv = results[4];
                 Point3 Xvv = results[5];
-                CHECK(Xuu.length() <=1e-12);
-                CHECK(Xuv.length() <=1e-12);
-                CHECK(Xvv.length() <=1e-12);
+                CHECK(Xuu.length() <=1e-5);
+                CHECK(Xuv.length() <=1e-5);
+                CHECK(Xvv.length() <=1e-5);
             }
         }
     }
 }
-TEST_CASE("Test second derivative patch evaluation approx", "[derivative]"){
+TEST_CASE("Test second derivative patch evaluation approx", "[derivative2]"){
 
 
     char filea[300]; char fileb[300]; char filec[300]; int cl; int pc;	int ct;   
@@ -74,7 +74,7 @@ TEST_CASE("Test second derivative patch evaluation approx", "[derivative]"){
     ifstream tmpb(fileb);
     BdULib* bdulib = new BdULib();
     bdulib->setup(tmpb);
-    ifstream tmpc(string("../wrl_files/cube.wrl").c_str());
+    ifstream tmpc(string("wrl_meshes/wrl/cube.wrl").c_str());
     
     BdSurf* bdsurf = new BdSurf();
     bdsurf->setParams(cl,pc,ct,bt,pp, lb,ub, gl, fs, cot, sd ,poudeg, refinement_factor, 0);

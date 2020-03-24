@@ -18,19 +18,19 @@ TEST_CASE("Benchmark FaceMap evaluations", "[bench]"){
     load_options(filec, refinement_factor, patch_order, adaptive, filepoly);
     refinement_factor = 0; 
     adaptive = 0;
-    patch_order = 11;
+    patch_order = 3;
 
     PolynomialEvaluator* polynomial_evaluator = 
-        new PolynomialEvaluator(string("../wrl_files/poly/flat_patch.poly"), string("../wrl_files/flat_patch.wrl"));
+        new PolynomialEvaluator(string("wrl_meshes/poly/flat_patch.poly"), string("wrl_meshes/wrl/flat_patch.wrl"));
 
     FaceMapSurf* face_map = new FaceMapSurf(polynomial_evaluator);
     face_map->set_params(refinement_factor, patch_order, adaptive, 1e-4);
     face_map->setup();
     
-    FaceMapSurf* new_face_map = new FaceMapSurf(polynomial_evaluator);
-    new_face_map->set_params(refinement_factor, patch_order, adaptive, 1e-4);
-    new_face_map->_legacy = false;
-    new_face_map->setup();
+    //FaceMapSurf* new_face_map = new FaceMapSurf(polynomial_evaluator);
+    //new_face_map->set_params(refinement_factor, patch_order, adaptive, 1e-4);
+    //new_face_map->_legacy = false;
+    //new_face_map->setup();
 
     // Generate equispaced samples in [0,1]^2 to evaluate the bezier patch at 
     int num_samples = 10;

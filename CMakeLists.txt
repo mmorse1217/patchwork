@@ -13,8 +13,8 @@ FUNCTION(PREPEND var )
 ENDFUNCTION(PREPEND)
 
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/lib")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${Patchwork_SOURCE_DIR}/bin")
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${Patchwork_SOURCE_DIR}/lib")
 
 find_package(OpenMP REQUIRED)
 find_package(LAPACK REQUIRED)
@@ -40,7 +40,6 @@ target_include_directories(patchwork PUBLIC
 if(OpenMP_CXX_FOUND)
     target_link_libraries(patchwork OpenMP::OpenMP_CXX)
 endif()
-message(STATUS "blend " ${Blendsurf_LIB})
 target_link_libraries(patchwork -L${Blendsurf_LIB} -lblendsurf)
 target_link_libraries(patchwork -L${p4est_LIB} ${p4est_LIBRARIES})
 target_link_libraries(patchwork ${ZLIB_LIBRARIES})

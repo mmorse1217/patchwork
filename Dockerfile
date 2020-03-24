@@ -46,7 +46,7 @@ FROM patchwork-deps as patchwork-build
 #COPY . /patchwork/
 #RUN mkdir -p /patchwork/build/ 
 #WORKDIR /patchwork/build/
-#ENV BLENDSURF_DIR=/libs/blendsurf P4EST_DIR=/libs/p4est-1.1
+ENV BLENDSURF_DIR=/libs/blendsurf P4EST_DIR=/libs/p4est-1.1
 #RUN cmake -DCMAKE_MODULE_PATH=/usr/share/cmake-3.10/Modules/ ..  && \
 #    make
 #WORKDIR /patchwork/

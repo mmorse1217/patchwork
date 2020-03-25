@@ -14,4 +14,4 @@ jobs:
   #- name: Pull/build Docker image
   #run: docker build --file Dockerfile --target=patchwork-build --cache-from="mmorse1217/patchwork:latest" --tag patchwork-build .
     - name: Build patchwork
-      run: docker run --rm -v${GITHUB_WORKSPACE}:/patchwork patchwork:latest sh entrypoint.sh
+      run: docker run --rm -v${GITHUB_WORKSPACE}:/patchwork mmorse1217/patchwork:latest sh entrypoint.sh

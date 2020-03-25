@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.1)
 set(CMAKE_CXX_STANDARD 11)
-#set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}:${CMAKE_SOURCE_DIR}/cmake")
 
 
 project(Patchwork)
@@ -22,13 +21,10 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${Patchwork_SOURCE_DIR}/lib")
 find_package(OpenMP REQUIRED)
 find_package(LAPACK REQUIRED)
 find_package(Blendsurf REQUIRED)
-message(STATUS "p4est env var " $ENV{P4EST_DIR})
-message(STATUS "blend env var " $ENV{BLENDSURF_DIR})
 find_package(MPI REQUIRED)
 find_package(p4est REQUIRED)
 find_package(ZLIB REQUIRED)
 
-message(STATUS "p4est include dir" ${p4est_INCLUDE_DIR})
 add_subdirectory(src)
 add_subdirectory(tests)
 

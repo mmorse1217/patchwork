@@ -36,30 +36,23 @@ RUN cd libs && \
     make && \
     make install 
 
+# copy some relevant files into /patchwork required for blendsurf to run
 RUN mkdir /patchwork && \
     cp /libs/blendsurf/ccsubmatall.dat /patchwork && \
     cp /libs/blendsurf/bdsurf_U_ONE.dat /patchwork
+
+# specific location of blensurf and p4est
 ENV BLENDSURF_DIR=/libs/blendsurf P4EST_DIR=/libs/p4est-1.1
 
 # defines CI build: checks that patchwork core and renderer still compile
 FROM patchwork-deps as patchwork-build
-#COPY . /patchwork/
-#RUN mkdir -p /patchwork/build/ 
-#WORKDIR /patchwork/build/
-#RUN cmake -DCMAKE_MODULE_PATH=/usr/share/cmake-3.10/Modules/ ..  && \
-#    make
-#WORKDIR /patchwork/
-COPY . /patchwork/
-COPY entrypoint.sh /entrypoint.sh
 
+# copy source code from repo into container 
+COPY . /patchwork/
+
+# copy entrypoint.sh into container and execute its contents on "docker run"
+COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
-
-#RUN CMAKE_PREFIX_PATH=/libs/blendsurf:/libs/p4est cmake -DCMAKE_MODULE_PATH=/usr/share/cmake-3.10/Modules/ .. && \
-#    make
-#        -DCOMPILE_RENDERER=True ..  && make 
-#
-## to use the container
 FROM patchwork-deps as patchwork-dev
-
 CMD ["/bin/bash"]

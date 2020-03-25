@@ -3,7 +3,7 @@ set(CMAKE_CXX_STANDARD 11)
 
 
 project(Patchwork)
-list(PREPEND CMAKE_MODULE_PATH "${Patchwork_SOURCE_DIR}/cmake")
+list(APPEND CMAKE_MODULE_PATH "${Patchwork_SOURCE_DIR}/cmake")
 
 FUNCTION(PREPEND var )
    SET(listVar "")

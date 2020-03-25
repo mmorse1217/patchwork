@@ -11,7 +11,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: docker://mmorse1217/patchwork:latest
-    - name: Pull/build Docker image
-      run: docker build --file Dockerfile --target=patchwork-build --cache-from="mmorse1217/patchwork:latest" --tag patchwork-build .
+  #- name: Pull/build Docker image
+  #run: docker build --file Dockerfile --target=patchwork-build --cache-from="mmorse1217/patchwork:latest" --tag patchwork-build .
     - name: Build patchwork
-      run: docker run --rm patchwork-build
+      run: docker run --rm -v${GITHUB_WORKSPACE}:/patchwork patchwork:latest sh entrypoint.sh

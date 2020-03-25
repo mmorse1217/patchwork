@@ -55,4 +55,5 @@ ENV BLENDSURF_DIR=/libs/blendsurf P4EST_DIR=/libs/p4est-1.1
 #ENTRYPOINT ["/entrypoint.sh"]
 
 #FROM patchwork-deps as patchwork-dev
+WORKDIR /patchwork
 CMD ["/bin/bash"]

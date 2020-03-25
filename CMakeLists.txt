@@ -15,8 +15,7 @@ FUNCTION(PREPEND var )
 ENDFUNCTION(PREPEND)
 
 
-message(STATUS "CMAKE_MODULE_PATH" ${CMAKE_MODULE_PATH})
-message(STATUS "WHAT THE ACTUAL FUCK")
+message(STATUS "CMAKE_MODULE_PATH" "${CMAKE_MODULE_PATH}")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${Patchwork_SOURCE_DIR}/bin")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${Patchwork_SOURCE_DIR}/lib")
 
@@ -28,7 +27,6 @@ message(STATUS "blend env var " $ENV{BLENDSURF_DIR})
 find_package(MPI REQUIRED)
 find_package(p4est REQUIRED)
 find_package(ZLIB REQUIRED)
-message(STATUS "WHAT THE FUCK")
 
 message(STATUS "p4est include dir" ${p4est_INCLUDE_DIR})
 add_subdirectory(src)

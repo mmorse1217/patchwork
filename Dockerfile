@@ -48,7 +48,7 @@ ENV BLENDSURF_DIR=/libs/blendsurf P4EST_DIR=/libs/p4est-1.1
 FROM patchwork-deps as patchwork-build
 
 # copy source code from repo into container 
-COPY . /patchwork/
+#COPY . /patchwork/
 
 # copy entrypoint.sh into container and execute its contents on "docker run"
 COPY entrypoint.sh /entrypoint.sh

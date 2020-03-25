@@ -14,4 +14,7 @@ jobs:
     - name: Pull/build Docker image
       run: docker build --file Dockerfile --target=patchwork-build --cache-from="mmorse1217/patchwork:latest" --tag patchwork-build .
     - name: Build patchwork
-      run: docker run --rm patchwork-build
+      run: | 
+        ls /patchwork
+        ls /patchwork/cmake
+        docker run --rm patchwork-build

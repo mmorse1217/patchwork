@@ -1,8 +1,10 @@
 cmake_minimum_required(VERSION 3.1)
 set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
+#set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}:${CMAKE_SOURCE_DIR}/cmake")
+
 
 project(Patchwork)
+list(APPEND CMAKE_MODULE_PATH "${Patchwork_SOURCE_DIR}/cmake")
 
 FUNCTION(PREPEND var )
    SET(listVar "")
@@ -11,10 +13,10 @@ FUNCTION(PREPEND var )
    ENDFOREACH(f)
    SET(${var} "${listVar}" PARENT_SCOPE)
 ENDFUNCTION(PREPEND)
-set(CMAKE_MODULE_PATH "${Patchwork_SOURCE_DIR}/cmake;${CMAKE_MODULE_PATH}")
 
 
 message(STATUS "CMAKE_MODULE_PATH" ${CMAKE_MODULE_PATH})
+message(STATUS "WHAT THE ACTUAL FUCK")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${Patchwork_SOURCE_DIR}/bin")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${Patchwork_SOURCE_DIR}/lib")
 
@@ -26,6 +28,7 @@ message(STATUS "blend env var " $ENV{BLENDSURF_DIR})
 find_package(MPI REQUIRED)
 find_package(p4est REQUIRED)
 find_package(ZLIB REQUIRED)
+message(STATUS "WHAT THE FUCK")
 
 message(STATUS "p4est include dir" ${p4est_INCLUDE_DIR})
 add_subdirectory(src)

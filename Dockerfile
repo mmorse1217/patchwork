@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y \
     libblas-dev \
     liblapack-dev \
     mpich \
+    wget \
     zlib1g-dev &&\
     apt-get purge -y curl && \
     apt-get autoremove -y && \
@@ -25,8 +26,6 @@ RUN mkdir libs/ && \
     cmake -DCMAKE_MODULE_PATH=/usr/share/cmake-3.10/Modules/ ..  && \
     make 
 
-RUN apt-get update && apt-get install -y wget
-
 # Install p4est 
 RUN cd libs && \
     wget http://p4est.github.io/release/p4est-1.1.tar.gz && \
@@ -37,9 +36,9 @@ RUN cd libs && \
     make && \
     make install 
 
-RUN mkdir /patchwork
-RUN cp /libs/blendsurf/ccsubmatall.dat /patchwork
-RUN cp /libs/blendsurf/bdsurf_U_ONE.dat /patchwork
+RUN mkdir /patchwork && \
+    cp /libs/blendsurf/ccsubmatall.dat /patchwork && \
+    cp /libs/blendsurf/bdsurf_U_ONE.dat /patchwork
 ENV BLENDSURF_DIR=/libs/blendsurf P4EST_DIR=/libs/p4est-1.1
 
 # defines CI build: checks that patchwork core and renderer still compile

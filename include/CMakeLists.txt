@@ -10,6 +10,7 @@ set(Patchwork_INC
     #face_map_obj.hpp 
     function.hpp
     p4est_interface.hpp
+    p4est_interface.tpp
     polynomial_evaluator.hpp
     surface_evaluator.hpp
     sampling.hpp

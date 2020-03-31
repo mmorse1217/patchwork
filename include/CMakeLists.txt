@@ -5,6 +5,7 @@ set(Patchwork_INC
     bspline.hpp 
     bspline_codegen.hpp 
     bspline_precomp.hpp 
+    common.hpp
     diff_geom.hpp 
     face_map.hpp 
     #face_map_obj.hpp 

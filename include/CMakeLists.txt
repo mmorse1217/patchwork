@@ -11,6 +11,7 @@ set(Patchwork_INC
     function.hpp
     p4est_interface.hpp
     polynomial_evaluator.hpp
+    surface_evaluator.hpp
     sampling.hpp
 )
 
